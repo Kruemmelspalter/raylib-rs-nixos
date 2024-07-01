@@ -256,10 +256,10 @@ fn link(platform: Platform, platform_os: PlatformOS) {
         }
         PlatformOS::Linux => {
             println!("cargo:rustc-link-lib=glfw");
-            println!(
-                "cargo:rustc-link-search={}",
-                env::var("LD_LIBRARY_PATH").unwrap_or("".to_string())
-            );
+            // println!(
+            //     "cargo:rustc-link-search={}",
+            //     env::var("LD_LIBRARY_PATH").unwrap_or("".to_string())
+            // );
             // X11 linking
             #[cfg(not(feature = "wayland"))]
             {
