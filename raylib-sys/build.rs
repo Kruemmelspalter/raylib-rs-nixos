@@ -255,6 +255,11 @@ fn link(platform: Platform, platform_os: PlatformOS) {
             println!("cargo:rustc-link-lib=dylib=shell32");
         }
         PlatformOS::Linux => {
+            println!("cargo:rustc-link-lib=glfw");
+            println!(
+                "cargo:rustc-link-search={}",
+                env::var("LD_LIBRARY_PATH").unwrap_or("".to_string())
+            );
             // X11 linking
             #[cfg(not(feature = "wayland"))]
             {
@@ -267,7 +272,7 @@ fn link(platform: Platform, platform_os: PlatformOS) {
             {
                 println!("cargo:rustc-link-search=/usr/local/lib");
                 println!("cargo:rustc-link-lib=wayland-client");
-                println!("cargo:rustc-link-lib=glfw"); // Link against locally installed glfw
+                // println!("cargo:rustc-link-lib=glfw"); // Link against locally installed glfw
             }
         }
         PlatformOS::OSX => {
