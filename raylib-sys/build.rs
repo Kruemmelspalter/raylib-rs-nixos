@@ -83,7 +83,9 @@ fn build_with_cmake(src_path: &str) {
         // turn off until this is fixed
         .define("SUPPORT_BUSY_WAIT_LOOP", "OFF")
         .define("SUPPORT_FILEFORMAT_JPG", "ON")
-        .define("RAYMATH_STATIC_INLINE", "ON");
+        .define("RAYMATH_STATIC_INLINE", "ON")
+        .define("USE_EXTERNAL_GLFW", "ON")
+        .define("SHARED", "ON");
 
     #[cfg(feature = "custom_frame_control")]
     {
@@ -94,7 +96,7 @@ fn build_with_cmake(src_path: &str) {
     #[cfg(feature = "wayland")]
     {
         builder.define("USE_WAYLAND", "ON");
-        builder.define("USE_EXTERNAL_GLFW", "ON"); // Necessary for wayland support in my testing
+        // builder.define("USE_EXTERNAL_GLFW", "ON"); // Necessary for wayland support in my testing
     }
 
     // This seems redundant, but I felt it was needed incase raylib changes it's default
